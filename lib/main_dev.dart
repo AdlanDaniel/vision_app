@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:vision_app/application.dart';
 import 'package:vision_app/core/environment/environment.dart';
-import 'package:vision_app/old_main.dart';
+import 'package:vision_app/core/flavor/flavor_config.dart';
+import 'package:vision_app/injection/injection.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env");
   final environment = DefaultEnvironment(dotenv);
-    runApp(MyApp());
-  
+  InjectionManager.init(InjectionGetIt());
+  InjectionManager.i.registerSingleton<Environment>(environment);
+  final flavorConfig = FlavorConfig(
+    baseUrl: environment.baseUrlDev,
+    connectTimeOut: environment.connectTimeOut,
+    receiveTimeOut: environment.receiveTimeOut,
+    flavor: AppFlavor.dev,
+  );
+
+  initializeApp(flavorConfig);
 }
