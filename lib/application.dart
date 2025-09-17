@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vision_app/core/flavor/flavor_config.dart';
+import 'package:vision_app/init_depedencies.dart';
 
-void runApp() {
-  runApp();
+void initializeApp(FlavorConfig flavor) {
+  InitDepedencies.init(flavor);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
