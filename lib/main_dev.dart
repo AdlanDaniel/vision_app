@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vision_app/application.dart';
 import 'package:vision_app/core/environment/environment.dart';
 import 'package:vision_app/core/flavor/flavor_config.dart';
-import 'package:vision_app/injection/injection.dart';
+import 'package:vision_app/core/injection/injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
