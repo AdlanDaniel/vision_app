@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "113358449656",
+    "project_id": "vision-app-cd004",
+    "storage_bucket": "vision-app-cd004.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113358449656:android:07463a9bcfa8622e14440d",
+        "android_client_info": {
+          "package_name": "com.example.vision_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwXJ2qw-9T-YLjLAaxEXkISd9PCIrtSPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
