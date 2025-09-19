@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vision_app/core/flavor/flavor_config.dart';
+import 'package:vision_app/core/ui/theme/vision_theme.dart';
+import 'package:vision_app/core/utils/constants/routes/vision_routes.dart';
 import 'package:vision_app/init_depedencies.dart';
 
 void initializeApp(FlavorConfig flavor) {
@@ -13,20 +15,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Vision App',
+      debugShowCheckedModeBanner: false,
+      theme: VisionTheme.darkTheme,
+      home: const MyHomePage(title: 'Vision App Home Page'),
     );
   }
-
-  
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
 
   final String title;
 
@@ -66,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), 
+      ),
     );
   }
 }
