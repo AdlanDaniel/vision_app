@@ -49,6 +49,7 @@ dependencies:
   shimmer: ^3.0.0
   firebase_core: ^4.1.0
   firebase_auth: ^6.0.2
+  svg_flutter: ^0.0.1
    
  
 
