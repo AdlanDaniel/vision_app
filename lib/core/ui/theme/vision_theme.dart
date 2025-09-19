@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vision_app/core/ui/theme/vision_colors.dart';
-import 'package:vision_app/core/utils/sizes/sizes.dart';
+import 'package:vision_app/core/utils/constants/sizes/sizes.dart';
 
 class VisionTheme {
   VisionTheme._();

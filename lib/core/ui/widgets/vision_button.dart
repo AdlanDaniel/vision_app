@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:vision_app/core/ui/theme/vision_colors.dart';
-import 'package:vision_app/core/utils/sizes/sizes.dart';
+import 'package:vision_app/core/utils/constants/sizes/sizes.dart';
 
 
 class VisionButton extends StatefulWidget {

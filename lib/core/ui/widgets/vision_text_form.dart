@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vision_app/core/ui/theme/vision_colors.dart';
-import 'package:vision_app/core/utils/sizes/sizes.dart';
+import 'package:vision_app/core/utils/constants/sizes/sizes.dart';
 
 class VisionTextForm extends StatefulWidget {
   final void Function(String?)? onSaved;
