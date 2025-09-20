@@ -27,5 +27,5 @@ void main() async {
     flavor: AppFlavor.prod,
   );
 
-  initializeApp(flavorConfig);
+  await initializeApp(flavorConfig);
 }
