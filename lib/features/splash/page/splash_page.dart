@@ -14,6 +14,10 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(seconds: 2)).then(
+      (value) =>
+          Navigator.pushReplacementNamed(context, VisionRoutes.registerUser),
+    );
   }
 
   @override

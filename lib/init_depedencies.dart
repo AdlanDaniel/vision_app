@@ -10,16 +10,19 @@ import 'package:vision_app/core/rest_client/dio_factory.dart';
 import 'package:vision_app/core/rest_client/dio_rest_client.dart';
 import 'package:vision_app/core/rest_client/rest_client.dart';
 import 'package:vision_app/core/injection/injection.dart';
+import 'package:vision_app/features/auth/di/auth_di.dart';
 
 class InitDepedencies {
-  static Future<void> init(FlavorConfig config)async {
-   await _initLocalStorage();
+  static Future<void> init(FlavorConfig config) async {
+    await _initLocalStorage();
     _initAppSession();
-   await _initAppVersion();
+    await _initAppVersion();
     _initRestClient(config);
+
+    AuthDi.init();
   }
 
-   static void _initRestClient(FlavorConfig config) {
+  static void _initRestClient(FlavorConfig config) {
     Dio dio = DioFactory.create(
       baseUrl: config.baseUrl,
       connectTimeout: config.connectTimeOut,
@@ -36,14 +39,12 @@ class InitDepedencies {
         maxWidth: 80,
       ),
       // AuthInterceptor(firebaseAuth: FirebaseClient.firebaseAuth()),
-      AuthInterceptor()
+      AuthInterceptor(),
     ]);
 
     InjectionManager.i.registerSingleton<Dio>(dio);
     InjectionManager.i.registerSingleton<RestClient>(DioRestClient(dio));
   }
-
-
 
   static Future<void> _initLocalStorage() async {
     final localStorage = await SharedPreferences.getInstance();
