@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vision_app/core/flavor/flavor_config.dart';
 import 'package:vision_app/core/ui/theme/vision_theme.dart';
 import 'package:vision_app/core/utils/constants/routes/vision_routes.dart';
+import 'package:vision_app/features/auth/pages/login/page/login_page.dart';
 import 'package:vision_app/features/auth/pages/on_board/page/on_board_page.dart';
 import 'package:vision_app/features/auth/pages/register/page/register_page.dart';
 import 'package:vision_app/features/splash/page/splash_page.dart';
@@ -22,8 +23,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: VisionTheme.darkTheme,
       initialRoute: VisionRoutes.initial,
-      routes: {VisionRoutes.initial: (context) => SplashPage(),  VisionRoutes.registerUser: (context) => RegisterPage()},
-       onGenerateRoute: (settings) {
+      routes: {
+        VisionRoutes.initial: (context) => SplashPage(),
+        VisionRoutes.registerUser: (context) => RegisterPage(),
+        VisionRoutes.login: (context) => LoginPage(),
+      },
+      onGenerateRoute: (settings) {
         switch (settings.name) {
           case VisionRoutes.onBoardUser:
             final args = settings.arguments as Map<String, String>;
