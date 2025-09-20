@@ -6,6 +6,9 @@ import 'package:vision_app/features/auth/pages/login/page/login_page.dart';
 import 'package:vision_app/features/auth/pages/on_board/page/on_board_page.dart';
 import 'package:vision_app/features/auth/pages/register/page/register_page.dart';
 import 'package:vision_app/features/home/page/home_page.dart';
+import 'package:vision_app/features/profile/pages/change_password/page/change_password_page.dart';
+import 'package:vision_app/features/profile/pages/detail_plan/page/detail_plan_page.dart';
+import 'package:vision_app/features/profile/pages/profile_details/page/profile_detail_page.dart';
 import 'package:vision_app/features/splash/page/splash_page.dart';
 import 'package:vision_app/init_depedencies.dart';
 
@@ -23,12 +26,17 @@ class MyApp extends StatelessWidget {
       title: 'Vision App',
       debugShowCheckedModeBanner: false,
       theme: VisionTheme.darkTheme,
-      // initialRoute: VisionRoutes.initial,
+      initialRoute: VisionRoutes.initial,
       routes: {
-        VisionRoutes.initial: (context) => HomePage(),
+        VisionRoutes.initial: (context) => SplashPage(),
         VisionRoutes.registerUser: (context) => RegisterPage(),
         VisionRoutes.login: (context) => LoginPage(),
         VisionRoutes.home: (context) => HomePage(),
+        VisionRoutes.detailProfile: (context) => ProfileDetailPage(),
+        VisionRoutes.detailPlan: (context) => DetailPlanPage(),
+         VisionRoutes.changePassword: (context) => ChangePasswordPage(),
+         
+
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
