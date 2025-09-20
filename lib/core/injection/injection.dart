@@ -18,14 +18,9 @@ abstract class Injection {
   });
   T get<T extends Object>();
 
-   bool isRegistered<T extends Object>({
-    Object? instance,
-    String? instanceName,
-  });
+  bool isRegistered<T extends Object>({Object? instance, String? instanceName});
 
   Future<void> reset({bool dispose = true});
-
-
 }
 
 class InjectionManager {

@@ -5,11 +5,12 @@ import 'package:vision_app/core/utils/constants/routes/vision_routes.dart';
 import 'package:vision_app/features/auth/pages/login/page/login_page.dart';
 import 'package:vision_app/features/auth/pages/on_board/page/on_board_page.dart';
 import 'package:vision_app/features/auth/pages/register/page/register_page.dart';
+import 'package:vision_app/features/home/page/home_page.dart';
 import 'package:vision_app/features/splash/page/splash_page.dart';
 import 'package:vision_app/init_depedencies.dart';
 
-void initializeApp(FlavorConfig flavor) {
-  InitDepedencies.init(flavor);
+Future<void> initializeApp(FlavorConfig flavor) async {
+  await InitDepedencies.init(flavor);
   runApp(const MyApp());
 }
 
@@ -22,11 +23,12 @@ class MyApp extends StatelessWidget {
       title: 'Vision App',
       debugShowCheckedModeBanner: false,
       theme: VisionTheme.darkTheme,
-      initialRoute: VisionRoutes.initial,
+      // initialRoute: VisionRoutes.initial,
       routes: {
-        VisionRoutes.initial: (context) => SplashPage(),
+        VisionRoutes.initial: (context) => HomePage(),
         VisionRoutes.registerUser: (context) => RegisterPage(),
         VisionRoutes.login: (context) => LoginPage(),
+        VisionRoutes.home: (context) => HomePage(),
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
