@@ -11,6 +11,7 @@ import 'package:vision_app/core/rest_client/dio_rest_client.dart';
 import 'package:vision_app/core/rest_client/rest_client.dart';
 import 'package:vision_app/core/injection/injection.dart';
 import 'package:vision_app/features/auth/di/auth_di.dart';
+import 'package:vision_app/features/home/di/home_di.dart';
 
 class InitDepedencies {
   static Future<void> init(FlavorConfig config) async {
@@ -20,6 +21,7 @@ class InitDepedencies {
     _initRestClient(config);
 
     AuthDi.init();
+    HomeDI.init();
   }
 
   static void _initRestClient(FlavorConfig config) {
