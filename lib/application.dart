@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vision_app/core/flavor/flavor_config.dart';
 import 'package:vision_app/core/ui/theme/vision_theme.dart';
 import 'package:vision_app/core/utils/constants/routes/vision_routes.dart';
+import 'package:vision_app/features/auth/pages/forgot_password/pages/forgot_password_page.dart';
+import 'package:vision_app/features/auth/pages/forgot_password/pages/forgot_password_sucess_page.dart';
 import 'package:vision_app/features/auth/pages/login/page/login_page.dart';
 import 'package:vision_app/features/auth/pages/on_board/page/on_board_page.dart';
 import 'package:vision_app/features/auth/pages/register/page/register_page.dart';
@@ -35,6 +37,9 @@ class MyApp extends StatelessWidget {
         VisionRoutes.detailProfile: (context) => ProfileDetailPage(),
         VisionRoutes.detailPlan: (context) => DetailPlanPage(),
          VisionRoutes.changePassword: (context) => ChangePasswordPage(),
+          VisionRoutes.forgotPassword: (context) => ForgoutPasswordPage(),
+        VisionRoutes.successForgotPassword: (context) =>
+            ForgoutPasswordSucessPage(),
          
 
       },
