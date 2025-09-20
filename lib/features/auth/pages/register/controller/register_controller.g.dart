@@ -9,20 +9,79 @@ part of 'register_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RegisterController on RegisterControllerBase, Store {
-  late final _$registerUserAsyncAction = AsyncAction(
-    'RegisterControllerBase.registerUser',
+  late final _$isLoadingAtom = Atom(
+    name: 'RegisterControllerBase.isLoading',
     context: context,
   );
 
   @override
-  Future<void> registerUser() {
-    return _$registerUserAsyncAction.run(() => super.registerUser());
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$registerAsyncAction = AsyncAction(
+    'RegisterControllerBase.register',
+    context: context,
+  );
+
+  @override
+  Future<Either<Exception, Unit>> register(String email, String password) {
+    return _$registerAsyncAction.run(() => super.register(email, password));
+  }
+
+  late final _$RegisterControllerBaseActionController = ActionController(
+    name: 'RegisterControllerBase',
+    context: context,
+  );
+
+  @override
+  void setIsLoading(bool value) {
+    final _$actionInfo = _$RegisterControllerBaseActionController.startAction(
+      name: 'RegisterControllerBase.setIsLoading',
+    );
+    try {
+      return super.setIsLoading(value);
+    } finally {
+      _$RegisterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String? validateEmail(String? value) {
+    final _$actionInfo = _$RegisterControllerBaseActionController.startAction(
+      name: 'RegisterControllerBase.validateEmail',
+    );
+    try {
+      return super.validateEmail(value);
+    } finally {
+      _$RegisterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String? validatePassword(String? value) {
+    final _$actionInfo = _$RegisterControllerBaseActionController.startAction(
+      name: 'RegisterControllerBase.validatePassword',
+    );
+    try {
+      return super.validatePassword(value);
+    } finally {
+      _$RegisterControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-
+isLoading: ${isLoading}
     ''';
   }
 }
