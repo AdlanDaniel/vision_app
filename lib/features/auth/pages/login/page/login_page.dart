@@ -20,8 +20,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _controller = InjectionManager.i.get<LoginController>();
-  final TextEditingController _emailEC = TextEditingController();
-  final TextEditingController _passwordEC = TextEditingController();
+  final TextEditingController _emailEC = TextEditingController(text:'dan@email.com');
+  final TextEditingController _passwordEC = TextEditingController(text:'12345678');
   final _formKey = GlobalKey<FormState>();
 
   @override

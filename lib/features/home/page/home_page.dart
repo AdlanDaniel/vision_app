@@ -9,6 +9,7 @@ import 'package:vision_app/core/ui/widgets/vision_shimmer.dart';
 import 'package:vision_app/core/utils/constants/assets.dart';
 import 'package:vision_app/core/utils/constants/routes/vision_routes.dart';
 import 'package:vision_app/core/utils/constants/sizes/sizes.dart';
+import 'package:vision_app/features/auth/pages/login/controller/login_controller.dart';
 import 'package:vision_app/features/home/controller/home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -328,8 +329,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget _profilePhotoWidget() {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, VisionRoutes.detailProfile);
+      onTap: () async {
+        // Navigator.pushNamed(context, VisionRoutes.detailProfile);
+        final result = await InjectionManager.i.get<LoginController>().logout();
+        result.fold((l) => null, (r) {
+          Navigator.pushReplacementNamed(context, VisionRoutes.login);
+        });
       },
       child: Container(
         height: 35,
