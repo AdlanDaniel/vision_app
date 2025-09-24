@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
+import 'package:vision_app/core/errors/vision_exception.dart';
 import 'package:vision_app/features/auth/repository/auth_repository.dart';
 part 'login_controller.g.dart';
 
@@ -57,6 +58,23 @@ abstract class LoginControllerBase with Store {
         log("User logged in successfully: $uid");
         setIsLoading(false);
         return right(unit);
+      },
+    );
+  }
+
+  @action
+  Future<Either<String, bool>> isLoggedIn() async {
+  
+    final Either<VisionException, bool> result = await _authRepo
+        .isLoggedIn();
+    return result.fold(
+      (error) {
+    
+        log("Error signing up user: $error");
+        return left(error.message );
+      },
+      (isLoggedIn) {
+        return right(isLoggedIn);
       },
     );
   }
