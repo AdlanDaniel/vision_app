@@ -42,7 +42,10 @@ class AuthDatasourceImpl implements AuthDatasource {
       final user = _firebaseAuth.currentUser;
       return user != null;
     } on FirebaseAuthException catch (e) {
-      throw FirebaseAuthErrorMapper.map(e, messageError: 'Usuário não está logado');
+      throw FirebaseAuthErrorMapper.map(
+        e,
+        messageError: 'Usuário não está logado',
+      );
     } catch (e) {
       throw VisionException('Um erro desconhecido ocorreu ao deslogar');
     }
@@ -179,7 +182,7 @@ class FirebaseAuthErrorMapper {
         return EmailAlreadyInUseException();
 
       default:
-        return GenericAuthException('Erro: ${messageError ??e.code}');
+        return GenericAuthException('Erro: ${messageError ?? e.code}');
     }
   }
 }
