@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:vision_app/core/errors/vision_exception.dart';
 import 'package:vision_app/features/auth/datasource/auth_datasource.dart';
+import 'package:vision_app/features/auth/repository/model/on_boarding_model.dart';
 
 abstract class AuthRepository {
   Future<Either<VisionException, String>> login(String email, String password);
@@ -9,7 +10,7 @@ abstract class AuthRepository {
   Future<Either<VisionException, Unit>> logout();
   Future<Either<VisionException, String>> signUp(String email, String password);
   Future<Either<VisionException, Unit>> resetPassword(String email);
-  Future<Either<VisionException, Unit>> finishOnBoarding();
+  Future<Either<VisionException, Unit>> finishOnBoarding(OnBoardingUserModel userModel);
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -83,9 +84,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<VisionException, Unit>> finishOnBoarding() async {
+  Future<Either<VisionException, Unit>> finishOnBoarding(OnBoardingUserModel userModel) async {
     try {
-      await _authDatasource.finishOnBoarding();
+      await _authDatasource.finishOnBoarding(userModel);
       return const Right(unit);
     } on VisionException catch (e) {
       return Left(FirebaseRepoExceptionMapper.map(e));

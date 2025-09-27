@@ -37,6 +37,16 @@ mixin _$LoginController on LoginControllerBase, Store {
     return _$loginAsyncAction.run(() => super.login(email, password));
   }
 
+  late final _$isLoggedInAsyncAction = AsyncAction(
+    'LoginControllerBase.isLoggedIn',
+    context: context,
+  );
+
+  @override
+  Future<Either<String, bool>> isLoggedIn() {
+    return _$isLoggedInAsyncAction.run(() => super.isLoggedIn());
+  }
+
   late final _$loginWithGoogleAsyncAction = AsyncAction(
     'LoginControllerBase.loginWithGoogle',
     context: context,
