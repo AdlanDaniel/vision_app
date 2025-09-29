@@ -4,12 +4,12 @@ import 'package:intl/intl.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 import 'package:vision_app/core/injection/injection.dart';
 import 'package:vision_app/core/ui/theme/vision_colors.dart';
+import 'package:vision_app/core/ui/widgets/vis_avatar_profile_widget.dart';
 import 'package:vision_app/core/ui/widgets/vision_button.dart';
 import 'package:vision_app/core/ui/widgets/vision_shimmer.dart';
 import 'package:vision_app/core/utils/constants/assets.dart';
 import 'package:vision_app/core/utils/constants/routes/vision_routes.dart';
 import 'package:vision_app/core/utils/constants/sizes/sizes.dart';
-import 'package:vision_app/features/auth/pages/login/controller/login_controller.dart';
 import 'package:vision_app/features/home/controller/home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -70,7 +70,26 @@ class _HomePageState extends State<HomePage> {
                             width: 35,
                             height: 35,
                           ),
-                          _profilePhotoWidget(),
+                          // _profilePhotoWidget(),
+                          VisAvatarUserWidget(
+                            imageUrl: imageUser,
+                            name: 'Daniel',
+                            onTap: () async {
+                              Navigator.pushNamed(
+                                context,
+                                VisionRoutes.detailProfile,
+                              );
+                              // final result = await InjectionManager.i
+                              //     .get<LoginController>()
+                              //     .logout();
+                              // result.fold((l) => null, (r) {
+                              //   Navigator.pushReplacementNamed(
+                              //     context,
+                              //     VisionRoutes.login,
+                              //   );
+                              // });
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -324,39 +343,6 @@ class _HomePageState extends State<HomePage> {
           width: double.infinity,
         );
       },
-    );
-  }
-
-  Widget _profilePhotoWidget() {
-    return InkWell(
-      onTap: () async {
-        // Navigator.pushNamed(context, VisionRoutes.detailProfile);
-        final result = await InjectionManager.i.get<LoginController>().logout();
-        result.fold((l) => null, (r) {
-          Navigator.pushReplacementNamed(context, VisionRoutes.login);
-        });
-      },
-      child: Container(
-        height: 35,
-        width: 35,
-        decoration: BoxDecoration(
-          color: imageUser == null ? VisionColors.surface : Colors.white,
-          shape: BoxShape.circle,
-          image: imageUser != null
-              ? DecorationImage(
-                  fit: BoxFit.cover,
-                  image: Image.network(
-                    imageUser!,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset(VisionAssets.userImage);
-                    },
-                  ).image,
-                )
-              : const DecorationImage(
-                  image: AssetImage(VisionAssets.userImage),
-                ),
-        ),
-      ),
     );
   }
 

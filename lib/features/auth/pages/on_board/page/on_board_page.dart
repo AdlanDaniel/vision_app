@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:vision_app/core/injection/injection.dart';
 import 'package:vision_app/core/ui/theme/vision_colors.dart';
-import 'package:vision_app/core/ui/widgets/vision_box_choose_image.dart';
+import 'package:vision_app/core/ui/widgets/vis_box_choose_image.dart';
 import 'package:vision_app/core/ui/widgets/vision_button.dart';
 import 'package:vision_app/core/ui/widgets/vision_text_form.dart';
 import 'package:vision_app/core/utils/constants/assets.dart';
@@ -74,7 +74,9 @@ class _OnBoardUserPageState extends State<OnBoardUserPage> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: VisionSizes.largeL60),
-                VisionBoxChooseImage(onSelectedImage: _controller.sePhotoUser),
+                VisBoxChooseImageWidget(
+                  onSelectedImage: _controller.sePhotoUser,
+                ),
                 const SizedBox(height: VisionSizes.largeL60),
 
                 VisionTextForm(
@@ -116,33 +118,32 @@ class _OnBoardUserPageState extends State<OnBoardUserPage> {
   }
 
   Future<void> _finishOnBoard() async {
-      if (_formKey.currentState!.validate()) {
-
-        final result = await _controller.finishOnBoarding();
-        result.fold(
-          (error) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Registration failed: ${error.toString()}')),
-            );
-          },
-          (success) async {
-            final result = await _controller.loginWithOnBoard(
-              email: widget.email,
-              password: widget.password,
-            );
-            result.fold(
-              (error) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text('Login falhou!')));
-              },
-              (success) {
-                Navigator.pushReplacementNamed(context, VisionRoutes.home);
-              },
-            );
-          },
-        );
-      }
+    if (_formKey.currentState!.validate()) {
+      final result = await _controller.finishOnBoarding();
+      result.fold(
+        (error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Registration failed: ${error.toString()}')),
+          );
+        },
+        (success) async {
+          final result = await _controller.loginWithOnBoard(
+            email: widget.email,
+            password: widget.password,
+          );
+          result.fold(
+            (error) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text('Login falhou!')));
+            },
+            (success) {
+              Navigator.pushReplacementNamed(context, VisionRoutes.home);
+            },
+          );
+        },
+      );
+    }
   }
 
   // Widget _boxChoosePhotoWidget() {

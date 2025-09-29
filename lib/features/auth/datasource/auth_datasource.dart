@@ -1,10 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vision_app/core/errors/vision_exception.dart';
 import 'package:vision_app/core/rest_client/rest_client.dart';
 import 'package:vision_app/features/auth/repository/model/on_boarding_model.dart';
-import 'package:mime/mime.dart';
 
 abstract class AuthDatasource {
   Future<String> login(String email, String password);

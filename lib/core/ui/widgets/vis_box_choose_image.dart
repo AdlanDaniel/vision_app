@@ -6,15 +6,16 @@ import 'package:vision_app/core/ui/theme/vision_colors.dart';
 import 'package:vision_app/core/ui/widgets/vision_pick_image.dart';
 import 'package:vision_app/core/utils/constants/sizes/sizes.dart';
 
-class VisionBoxChooseImage extends StatefulWidget {
+class VisBoxChooseImageWidget extends StatefulWidget {
   final Function(XFile?) onSelectedImage;
-  const VisionBoxChooseImage({super.key, required this.onSelectedImage});
+  const VisBoxChooseImageWidget({super.key, required this.onSelectedImage});
 
   @override
-  State<VisionBoxChooseImage> createState() => _VisionBoxChooseImageState();
+  State<VisBoxChooseImageWidget> createState() =>
+      _VisBoxChooseImageWidgetState();
 }
 
-class _VisionBoxChooseImageState extends State<VisionBoxChooseImage> {
+class _VisBoxChooseImageWidgetState extends State<VisBoxChooseImageWidget> {
   Uint8List? _imageBytes;
 
   Future<void> _loadImageBytes(XFile? image) async {
