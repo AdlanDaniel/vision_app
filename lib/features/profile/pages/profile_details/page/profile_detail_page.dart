@@ -41,7 +41,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
           },
         ),
         actions: [
-          _OutlinedButton(onPressed: () {}, textButton: 'Edit Profile'),
+          _OutlinedButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                VisionRoutes.editProfile,
+                arguments: _controller.user,
+              );
+            },
+            textButton: 'Edit Profile',
+          ),
         ],
       ),
       body: Padding(
@@ -223,7 +232,6 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
           size: 110,
           minSize: 80,
           maxSize: 110,
-          onChangePhoto: (filePhoto) {},
         ),
         SizedBox(width: VisionSizes.mediumM16),
         Column(
