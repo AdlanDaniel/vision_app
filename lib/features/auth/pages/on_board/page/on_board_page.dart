@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:vision_app/core/injection/injection.dart';
 import 'package:vision_app/core/ui/theme/vision_colors.dart';
+import 'package:vision_app/core/ui/widgets/vis_box_choose_image.dart';
 import 'package:vision_app/core/ui/widgets/vision_button.dart';
 import 'package:vision_app/core/ui/widgets/vision_text_form.dart';
 import 'package:vision_app/core/utils/constants/assets.dart';
@@ -73,13 +74,14 @@ class _OnBoardUserPageState extends State<OnBoardUserPage> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: VisionSizes.largeL60),
-
-                _boxChoosePhotoWidget(),
+                VisBoxChooseImageWidget(
+                  onSelectedImage: _controller.sePhotoUser,
+                ),
                 const SizedBox(height: VisionSizes.largeL60),
 
                 VisionTextForm(
                   label: 'Your Name',
-                  controller: _nameEC,
+                  onChanged: _controller.setName,
                   validator: _controller.validateNome,
                 ),
 
@@ -117,9 +119,7 @@ class _OnBoardUserPageState extends State<OnBoardUserPage> {
 
   Future<void> _finishOnBoard() async {
     if (_formKey.currentState!.validate()) {
-      final name = _nameEC.text;
-
-      final result = await _controller.finishOnBoarding(name);
+      final result = await _controller.finishOnBoarding();
       result.fold(
         (error) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -146,56 +146,107 @@ class _OnBoardUserPageState extends State<OnBoardUserPage> {
     }
   }
 
-  Widget _boxChoosePhotoWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: 116,
-          height: 116,
-          alignment: Alignment.center,
+  // Widget _boxChoosePhotoWidget() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     children: [
+  //       Container(
+  //         width: 116,
+  //         height: 116,
+  //         alignment: Alignment.center,
 
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(VisionSizes.largeL32),
-            color: VisionColors.primary,
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.camera_enhance_outlined,
-              size: 24,
-              color: VisionColors.onPrimary,
-            ),
-          ),
-        ),
-        const SizedBox(width: VisionSizes.mediumM20),
-        SizedBox(
-          width: 92,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'CHOOSE IMAGE',
+  //         decoration: BoxDecoration(
+  //           shape: BoxShape.rectangle,
+  //           borderRadius: BorderRadius.circular(VisionSizes.largeL32),
+  //           color: VisionColors.primary,
+  //         ),
+  //         child: IconButton(
+  //           onPressed: () {
+  //             showDialog(
+  //               context: context,
+  //               builder: (BuildContext context) {
+  //                 return _optionsPickImage();
+  //               },
+  //             );
+  //           },
+  //           icon: Icon(
+  //             Icons.camera_enhance_outlined,
+  //             size: 24,
+  //             color: VisionColors.onPrimary,
+  //           ),
+  //         ),
+  //       ),
+  //       const SizedBox(width: VisionSizes.mediumM20),
+  //       SizedBox(
+  //         width: 92,
+  //         child: Column(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             Text(
+  //               'CHOOSE IMAGE',
 
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: VisionColors.onBackground,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: VisionSizes.smallS8),
-              Text(
-                'A square .jpg, .gif, or .png image 200x200 or larger',
-                softWrap: true,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: VisionColors.onBackground,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+  //               style: Theme.of(context).textTheme.bodySmall?.copyWith(
+  //                 color: VisionColors.onBackground,
+  //                 fontWeight: FontWeight.w700,
+  //               ),
+  //             ),
+  //             const SizedBox(height: VisionSizes.smallS8),
+  //             Text(
+  //               'A square .jpg, .gif, or .png image 200x200 or larger',
+  //               softWrap: true,
+  //               style: Theme.of(context).textTheme.bodySmall?.copyWith(
+  //                 color: VisionColors.onBackground,
+  //                 fontWeight: FontWeight.w400,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  // Widget _optionsPickImage(){
+  //    return Dialog(
+  //     backgroundColor: const Color(0xFF1A1A1A),
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(20),
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           const Text(
+  //             "CHOOSE IMAGE",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontWeight: FontWeight.bold,
+  //             ),
+  //           ),
+  //           const SizedBox(height: 20),
+
+  //           // Botões de opção
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //             children: [
+  //               VisionPickImage(
+  //                 label: "Take a photo",
+  //                 isFromCamera: true,
+  //                 icon: Icons.camera_alt,
+  //                 color: Colors.deepPurple,
+  //                 onImageSelected: (image){},
+  //               ),
+  //               VisionPickImage(
+  //                 label: "Choose from gallery",
+  //                 icon: Icons.photo,
+  //                 color: Colors.grey[800]!,
+  //                 onImageSelected: (image){},
+  //               ),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+
+  // }
 }

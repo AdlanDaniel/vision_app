@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:vision_app/core/injection/injection.dart';
 import 'package:vision_app/core/ui/theme/vision_colors.dart';
+import 'package:vision_app/core/ui/widgets/vis_avatar_profile_widget.dart';
 import 'package:vision_app/core/ui/widgets/vision_button.dart';
 import 'package:vision_app/core/utils/constants/assets.dart';
 import 'package:vision_app/core/utils/constants/routes/vision_routes.dart';
@@ -40,7 +41,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
           },
         ),
         actions: [
-          _OutlinedButton(onPressed: () {}, textButton: 'Edit Profile'),
+          _OutlinedButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                VisionRoutes.editProfile,
+                arguments: _controller.user,
+              );
+            },
+            textButton: 'Edit Profile',
+          ),
         ],
       ),
       body: Padding(
@@ -193,28 +203,35 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
   Widget _profilePhotoWidget(UserModel? user) {
     return Row(
       children: [
-        Container(
-          height: 110,
-          width: 110,
-          decoration: BoxDecoration(
-            color: user?.profilePhoto == null
-                ? VisionColors.surface
-                : Colors.white,
-            shape: BoxShape.circle,
-            image: user?.profilePhoto != null
-                ? DecorationImage(
-                    fit: BoxFit.cover,
-                    image: Image.network(
-                      user!.profilePhoto!,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Image.asset(VisionAssets.userImage);
-                      },
-                    ).image,
-                  )
-                : const DecorationImage(
-                    image: AssetImage(VisionAssets.userImage),
-                  ),
-          ),
+        // Container(
+        //   height: 110,
+        //   width: 110,
+        //   decoration: BoxDecoration(
+        //     color: user?.profilePhoto == null
+        //         ? VisionColors.surface
+        //         : Colors.white,
+        //     shape: BoxShape.circle,
+        //     image: user?.profilePhoto != null
+        //         ? DecorationImage(
+        //             fit: BoxFit.cover,
+        //             image: Image.network(
+        //               user!.profilePhoto!,
+        //               errorBuilder: (context, error, stackTrace) {
+        //                 return Image.asset(VisionAssets.userImage);
+        //               },
+        //             ).image,
+        //           )
+        //         : const DecorationImage(
+        //             image: AssetImage(VisionAssets.userImage),
+        //           ),
+        //   ),
+        // ),
+        VisAvatarUserWidget(
+          imageUrl: user?.profilePhoto,
+          name: user?.name,
+          size: 110,
+          minSize: 80,
+          maxSize: 110,
         ),
         SizedBox(width: VisionSizes.mediumM16),
         Column(

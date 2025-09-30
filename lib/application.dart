@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vision_app/core/flavor/flavor_config.dart';
 import 'package:vision_app/core/ui/theme/vision_theme.dart';
@@ -7,9 +8,11 @@ import 'package:vision_app/features/auth/pages/forgot_password/pages/forgot_pass
 import 'package:vision_app/features/auth/pages/login/page/login_page.dart';
 import 'package:vision_app/features/auth/pages/on_board/page/on_board_page.dart';
 import 'package:vision_app/features/auth/pages/register/page/register_page.dart';
+import 'package:vision_app/features/auth/repository/model/user_model.dart';
 import 'package:vision_app/features/home/page/home_page.dart';
 import 'package:vision_app/features/profile/pages/change_password/page/change_password_page.dart';
 import 'package:vision_app/features/profile/pages/detail_plan/page/detail_plan_page.dart';
+import 'package:vision_app/features/profile/pages/edit_profile/page/edit_profile_page.dart';
 import 'package:vision_app/features/profile/pages/profile_details/page/profile_detail_page.dart';
 import 'package:vision_app/features/splash/page/splash_page.dart';
 import 'package:vision_app/init_depedencies.dart';
@@ -36,12 +39,10 @@ class MyApp extends StatelessWidget {
         VisionRoutes.home: (context) => HomePage(),
         VisionRoutes.detailProfile: (context) => ProfileDetailPage(),
         VisionRoutes.detailPlan: (context) => DetailPlanPage(),
-         VisionRoutes.changePassword: (context) => ChangePasswordPage(),
-          VisionRoutes.forgotPassword: (context) => ForgoutPasswordPage(),
+        VisionRoutes.changePassword: (context) => ChangePasswordPage(),
+        VisionRoutes.forgotPassword: (context) => ForgoutPasswordPage(),
         VisionRoutes.successForgotPassword: (context) =>
             ForgoutPasswordSucessPage(),
-         
-
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -52,6 +53,11 @@ class MyApp extends StatelessWidget {
                 email: args["email"]!,
                 password: args["password"]!,
               ),
+            );
+          case VisionRoutes.editProfile:
+            final args = settings.arguments as UserModel;
+            return MaterialPageRoute(
+              builder: (_) => EditProfilePage(user: args),
             );
         }
         return null;

@@ -165,26 +165,33 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> _signUp() async {
-    if (_formKey.currentState!.validate()) {
-      final email = _emailEC.text;
-      final password = _passwordEC.text;
+    final email = _emailEC.text;
+    final password = _passwordEC.text;
+    Navigator.pushNamed(
+      context,
+      VisionRoutes.onBoardUser,
+      arguments: {"email": email, "password": password},
+    );
+    // if (_formKey.currentState!.validate()) {
+    //   final email = _emailEC.text;
+    //   final password = _passwordEC.text;
 
-      final result = await _controller.register(email, password);
-      result.fold(
-        (error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Registration failed: ${error.toString()}')),
-          );
-        },
-        (success) {
-          Navigator.pushNamed(
-            context,
-            VisionRoutes.onBoardUser,
-            arguments: {"email": email, "password": password},
-          );
-        },
-      );
-    }
+    //   final result = await _controller.register(email, password);
+    //   result.fold(
+    //     (error) {
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         SnackBar(content: Text('Registration failed: ${error.toString()}')),
+    //       );
+    //     },
+    //     (success) {
+    //       Navigator.pushNamed(
+    //         context,
+    //         VisionRoutes.onBoardUser,
+    //         arguments: {"email": email, "password": password},
+    //       );
+    //     },
+    //   );
+    // }
   }
 
   String? _validateConfirmPassword(String? value) {

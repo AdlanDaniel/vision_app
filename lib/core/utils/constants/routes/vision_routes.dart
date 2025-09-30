@@ -10,4 +10,5 @@ class VisionRoutes {
   static const detailProfile = '/detailProfile';
   static const changePassword = '/changePassword';
   static const detailPlan = '/detailPlan';
+  static const editProfile = '/editProfile';
 }

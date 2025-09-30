@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vision_app/features/auth/repository/auth_repository.dart';
+import 'package:vision_app/features/auth/repository/model/on_boarding_model.dart';
 part 'on_board_controller.g.dart';
 
 class OnBoardController = OnBoardControllerBase with _$OnBoardController;
@@ -12,7 +14,27 @@ abstract class OnBoardControllerBase with Store {
 
   OnBoardControllerBase(this._authRepository);
 
-  
+  @observable
+  OnBoardingUserModel? onBoardUser;
+
+  @action
+  void setName(String value) {
+    if (onBoardUser == null) {
+      onBoardUser = OnBoardingUserModel(name: value);
+      return;
+    }
+    onBoardUser!.name = value;
+  }
+
+  @action
+  void sePhotoUser(XFile? image) {
+    if (onBoardUser == null) {
+      onBoardUser = OnBoardingUserModel(name: '', photoUser: image);
+      return;
+    }
+    onBoardUser!.photoUser = image;
+  }
+
   @observable
   bool isLoading = false;
 
@@ -32,10 +54,10 @@ abstract class OnBoardControllerBase with Store {
   }
 
   @action
-  Future<Either<String, String>> finishOnBoarding(String name) async {
+  Future<Either<String, String>> finishOnBoarding() async {
     setIsLoading(true);
 
-    final result = await _authRepository.finishOnBoarding();
+    final result = await _authRepository.finishOnBoarding(onBoardUser!);
 
     return result.fold(
       (l) {
@@ -55,7 +77,7 @@ abstract class OnBoardControllerBase with Store {
   }) async {
     setIsLoading(true);
     final List<Either<Exception, dynamic>> futures = await Future.wait([
-      _authRepository.finishOnBoarding(),
+      _authRepository.finishOnBoarding(onBoardUser!),
       _authRepository.login(email, password),
     ]);
 
@@ -73,5 +95,4 @@ abstract class OnBoardControllerBase with Store {
       },
     );
   }
-
 }

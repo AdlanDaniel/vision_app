@@ -115,18 +115,22 @@ class ProfileFirebaseDatasourceImpl implements ProfileDatasource {
     //   throw Exception('Erro ao atualizar foto');
     // }
   }
-  
+
   @override
   Future<void> deleteUserProfileData(int userId) {
     // TODO: implement deleteUserProfileData
     throw UnimplementedError();
   }
-  
-  @override
-  Future<Map<String, dynamic>> fetchUserProfileData() {
-    // TODO: implement fetchUserProfileData
-    throw UnimplementedError();
-  }
 
-  
+  @override
+  Future<Map<String, dynamic>> fetchUserProfileData() async {
+    await Future.delayed(Duration(seconds: 1));
+
+    return {
+      'name': 'John Doe',
+      'email': 'john.doe@example.com',
+      // 'profilePhoto': 'https://pxhere.com/pt/photo/451653',
+      'profilePhoto': null,
+    };
+  }
 }

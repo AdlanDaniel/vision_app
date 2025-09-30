@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vision_app/core/errors/vision_exception.dart';
 import 'package:vision_app/core/rest_client/rest_client.dart';
+import 'package:vision_app/features/auth/repository/model/on_boarding_model.dart';
 
 abstract class AuthDatasource {
   Future<String> login(String email, String password);
@@ -11,7 +12,7 @@ abstract class AuthDatasource {
 
   Future<void> resetPassword(String email);
   Future<bool> isLoggedIn();
-  Future<void> finishOnBoarding();
+  Future<void> finishOnBoarding(OnBoardingUserModel userModel);
 }
 
 class AuthDatasourceImpl implements AuthDatasource {
@@ -125,11 +126,16 @@ class AuthDatasourceImpl implements AuthDatasource {
   }
 
   @override
-  Future<void> finishOnBoarding() async {
+  Future<void> finishOnBoarding(OnBoardingUserModel userModel) async {
     //  try {
-    //     final RestClientResponse response = await restClient.patch(
-    //       '/api/users/updateMe',data: {'finished_onboarding':true}
-    //     );
+    //   final mimeType = lookupMimeType(userModel.name) ?? 'application/octet-stream';
+    //     final splitType = mimeType.split('/'); // ex: ['application', 'pdf']
+    //    FormData formData = FormData.fromMap({
+    //   "file": await MultipartFile.fromFile(userModel.photoUser!.path, filename: userModel.photoUser!.name,contentType: MediaType(splitType[0], splitType[1])),
+    //   ...userModel.toMap()
+    // });
+    //     await restClient.post('/api/users/upload', data: formData);
+
     //     if (response.statusCode != 200) {
     //       log(
     //         'Status code: ${response.statusCode} / Messagem: ${response.statusMessage}',
