@@ -15,6 +15,7 @@ import 'package:vision_app/features/profile/pages/detail_plan/page/detail_plan_p
 import 'package:vision_app/features/profile/pages/edit_profile/page/edit_profile_page.dart';
 import 'package:vision_app/features/profile/pages/profile_details/page/profile_detail_page.dart';
 import 'package:vision_app/features/splash/page/splash_page.dart';
+import 'package:vision_app/features/video_player/page/video_player_page.dart';
 import 'package:vision_app/init_depedencies.dart';
 
 Future<void> initializeApp(FlavorConfig flavor) async {
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         VisionRoutes.forgotPassword: (context) => ForgoutPasswordPage(),
         VisionRoutes.successForgotPassword: (context) =>
             ForgoutPasswordSucessPage(),
+        VisionRoutes.playerVideo: (context) => VideoPlayerPage(),
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
