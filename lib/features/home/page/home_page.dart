@@ -249,7 +249,12 @@ class _HomePageState extends State<HomePage> {
                                                 alignment: Alignment.center,
                                                 child: VisionButton(
                                                   textButton: 'Watch',
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    Navigator.pushNamed(
+                                                      context,
+                                                      VisionRoutes.playerVideo,
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                               SizedBox(
